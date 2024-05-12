@@ -1,3 +1,3 @@
 ﻿  main.cpp
-C:\Users\BiTz\Documents\Programming\joshai programming challenge\lightingManager\lightingManager\main.cpp(49,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\BiTz\Documents\Programming\joshai programming challenge\lightingManager\lightingManager\main.cpp(47,16): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   lightingManager.vcxproj -> C:\Users\BiTz\Documents\Programming\joshai programming challenge\lightingManager\x64\Debug\lightingManager.exe

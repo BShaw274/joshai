@@ -21,7 +21,6 @@ static void collectData(lighting* lights) {
 	string fullData;
 	string lightsCommand = "/lights/";
 	string id;
-	string prettyData;
 	json data;
 
 	list<string> ids;
@@ -31,8 +30,7 @@ static void collectData(lighting* lights) {
 	//initial collection of data for the ids
 	if (auto res = cli.Get("/lights")) {
 		if (res->status == StatusCode::OK_200) {
-			prettyData = res->body;
-			data = json::parse(prettyData);
+			data = json::parse(res->body);
 		}
 	}
 	else {
@@ -48,10 +46,6 @@ static void collectData(lighting* lights) {
 
 	int numLights = data.size();
 
-	//prettyData is for the initial print and making sure it looks nice
-	prettyData.clear();
-	prettyData = "[\n";
-
 	//this is where all of the incoming data will be stored
 	json jsonData;
 
@@ -66,8 +60,6 @@ static void collectData(lighting* lights) {
 
 		if (auto res = cli.Get(lightsCommand)) {
 			if (res->status == StatusCode::OK_200) {
-				prettyData.append(res->body);
-				prettyData.append(",\n");
 				jsonData[i] = json::parse(res->body);
 			}
 		}
@@ -78,13 +70,6 @@ static void collectData(lighting* lights) {
 
 	}
 
-	//Final string cleanup for pretty print
-	prettyData.pop_back();
-	prettyData.pop_back();
-	prettyData.append("\n]");
-
-
-
 	//checking to see if this is the initial set up
 	if (lights->ifData())
 	{
@@ -93,7 +78,7 @@ static void collectData(lighting* lights) {
 	else
 	{
 		lights->addLights(jsonData);
-		cout << prettyData << endl;
+		cout << jsonData.dump(2) << endl;
 	}
 
 
@@ -109,7 +94,7 @@ int main(int argc, char** argv)
 	//testing the server
 	if (auto res = cli.Get("/lights")) {
 		if (res->status == StatusCode::OK_200) {
-			//std::cout << res->body << std::endl;
+			//std:: cout << res->body << std::endl;
 			//dataIn = res->body;
 		}
 	}
@@ -123,7 +108,7 @@ int main(int argc, char** argv)
 
 	while (userin != "q") {
 
-		//this is to ping the server on a sec interval to check for updates.
+		//this is to ping the server on a 5 sec interval to check for updates.
 		auto now = std::chrono::steady_clock::now;
 		using namespace std::chrono_literals;
 		auto wait = 5s;
