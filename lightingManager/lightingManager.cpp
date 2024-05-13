@@ -147,6 +147,12 @@ namespace lightManager {
 				if (newData[i]["on"] != myData[i]["on"]) {
 					toggleStatus(myData[i]["id"], newData[i]["on"]);
 				}
+				if (newData[i]["name"] != myData[i]["name"]) {
+					cout << "{\nid: " << myData[i]["id"] << endl << "name: " << newData[i]["name"] << "\n}\n";
+				}
+				if (newData[i]["room"] != myData[i]["room"]) {
+					cout << "{\nid: " << myData[i]["id"] << endl << "room: " << newData[i]["room"] << "\n}\n";
+				}
 			}
 			myData = newData;
 			return;
