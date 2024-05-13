@@ -166,7 +166,6 @@ namespace lightManager {
 			//need to print which light was added
 			for (int i = 0; i < myNumLights; i++) {
 				if (newData[i]["id"] == importantId) {
-					//TODO: fix output
 					cout << "Light added!" << endl << newData[i] << endl;
 
 				}
